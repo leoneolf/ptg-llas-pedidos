@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "216361240371",
+    "project_id": "llas-pedidos-efd24",
+    "storage_bucket": "llas-pedidos-efd24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216361240371:android:2144c53c9c9bf138cde046",
+        "android_client_info": {
+          "package_name": "com.ptg.llas_pedidos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216361240371-7kl4jpncu8gbq4gjhpe7sdk9qap5m52l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjbL424lQIqx9a4BM-ilm3CDMOA8e3kLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "216361240371-7kl4jpncu8gbq4gjhpe7sdk9qap5m52l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
