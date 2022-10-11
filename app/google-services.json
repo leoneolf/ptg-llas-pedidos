@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "216361240371-ccbdso8vaknijlds9dn2u67f0tgvv7ke.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ptg.llas_pedidos",
+            "certificate_hash": "dc345ca1dfd6af565abdb9c100b495635231170c"
+          }
+        },
+        {
           "client_id": "216361240371-7kl4jpncu8gbq4gjhpe7sdk9qap5m52l.apps.googleusercontent.com",
           "client_type": 3
         }
