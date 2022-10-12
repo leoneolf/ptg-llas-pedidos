@@ -53,15 +53,16 @@ class MainActivity : ComponentActivity() {
                         singIn()
                     }
                 } else {
-                    val user: FirebaseUser = mAuth.currentUser!!
-                    ProfileScreen(
-                        profileImage = user.photoUrl!!,
-                        name = user.displayName!!,
-                        email = user.email!!,
-                        signOutClicked = {
-                            singOut()
-                        }
-                    )
+//                    val user: FirebaseUser = mAuth.currentUser!!
+//                    ProfileScreen(
+//                        profileImage = user.photoUrl!!,
+//                        name = user.displayName!!,
+//                        email = user.email!!,
+//                        signOutClicked = {
+//                            singOut()
+//                        }
+//                    )
+                    MainScreen()
                 }
 
             }
@@ -105,15 +106,16 @@ class MainActivity : ComponentActivity() {
                     Toast.makeText(this, "Logado com sucesso!", Toast.LENGTH_SHORT).show()
                     setContent {
                         LlasPedidosTheme {
-                            val user: FirebaseUser = mAuth.currentUser!!
-                            ProfileScreen(
-                                profileImage = user.photoUrl!!,
-                                name = user.displayName!!,
-                                email = user.email!!,
-                                signOutClicked = {
-                                    singOut()
-                                }
-                            )
+//                            val user: FirebaseUser = mAuth.currentUser!!
+//                            ProfileScreen(
+//                                profileImage = user.photoUrl!!,
+//                                name = user.displayName!!,
+//                                email = user.email!!,
+//                                signOutClicked = {
+//                                    singOut()
+//                                }
+//                            )
+                            MainScreen()
                         }
                     }
                 } else {

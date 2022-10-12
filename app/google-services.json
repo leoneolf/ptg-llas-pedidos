@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "216361240371-p3rj5q65df9i8l1q0cur4t77a48n1iet.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ptg.llas_pedidos",
+            "certificate_hash": "dbcd025696f04073bdb9f2bac2d9d68fb8424b39"
+          }
+        },
+        {
           "client_id": "216361240371-7kl4jpncu8gbq4gjhpe7sdk9qap5m52l.apps.googleusercontent.com",
           "client_type": 3
         }
