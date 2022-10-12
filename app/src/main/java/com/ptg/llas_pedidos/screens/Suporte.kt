@@ -1,4 +1,4 @@
-package com.ptg.llas_pedidos.telas
+package com.ptg.llas_pedidos.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

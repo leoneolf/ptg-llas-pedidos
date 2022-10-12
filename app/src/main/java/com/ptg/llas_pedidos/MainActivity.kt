@@ -1,6 +1,5 @@
 package com.ptg.llas_pedidos
 
-import android.content.ContentProviderClient
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -19,7 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthCredential
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.ptg.llas_pedidos.ui.theme.LlasPedidosTheme
 
@@ -48,7 +47,23 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             LlasPedidosTheme {
-//
+
+                if (mAuth.currentUser == null) {
+                    GoogleSignInButton {
+                        singIn()
+                    }
+                } else {
+                    val user: FirebaseUser = mAuth.currentUser!!
+                    ProfileScreen(
+                        profileImage = user.photoUrl!!,
+                        name = user.displayName!!,
+                        email = user.email!!,
+                        signOutClicked = {
+                            singOut()
+                        }
+                    )
+                }
+
             }
         }
     }
@@ -88,6 +103,19 @@ class MainActivity : ComponentActivity() {
                 if (task.isSuccessful) {
                     //Logado com sucesso
                     Toast.makeText(this, "Logado com sucesso!", Toast.LENGTH_SHORT).show()
+                    setContent {
+                        LlasPedidosTheme {
+                            val user: FirebaseUser = mAuth.currentUser!!
+                            ProfileScreen(
+                                profileImage = user.photoUrl!!,
+                                name = user.displayName!!,
+                                email = user.email!!,
+                                signOutClicked = {
+                                    singOut()
+                                }
+                            )
+                        }
+                    }
                 } else {
                     //Error ao logar
                     Toast.makeText(this, "Erro ao logar!", Toast.LENGTH_SHORT).show()
@@ -95,7 +123,35 @@ class MainActivity : ComponentActivity() {
             }
     }
 
+    private fun singOut() {
+        //Pegar a conta do Google
+        val googleSignInClient: GoogleSignInClient
 
+        //Configurando a entrada no Google
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        //Saindo de todas as contas
+        mAuth.signOut()
+        googleSignInClient.signOut()
+            .addOnSuccessListener {
+                Toast.makeText(this, "Desconectado com sucesso!", Toast.LENGTH_SHORT).show()
+                setContent {
+                    LlasPedidosTheme {
+                        GoogleSignInButton {
+                            singIn()
+                        }
+                    }
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Falha ao desconectar!", Toast.LENGTH_SHORT).show()
+            }
+    }
 
 }
 
