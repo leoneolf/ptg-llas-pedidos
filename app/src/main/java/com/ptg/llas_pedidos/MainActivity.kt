@@ -6,13 +6,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -53,26 +46,27 @@ class MainActivity : ComponentActivity() {
                         singIn()
                     }
                 } else {
-//                    val user: FirebaseUser = mAuth.currentUser!!
-//                    ProfileScreen(
-//                        profileImage = user.photoUrl!!,
-//                        name = user.displayName!!,
-//                        email = user.email!!,
-//                        signOutClicked = {
-//                            singOut()
-//                        }
-//                    )
-                    MainScreen()
+                    val user: FirebaseUser = mAuth.currentUser!!
+                    ProfileScreen(
+                        profileImage = user.photoUrl!!,
+                        name = user.displayName!!,
+                        email = user.email!!,
+                        singInAdminCliked = {
+                            singInAdmin()
+                        },
+                        singInClientCliked = {
+                            singInClient()
+                        },
+                        signOutClicked = {
+                            singOut()
+                        }
+                    )
                 }
 
             }
         }
     }
 
-    private fun singIn() {
-        val signInClient = googleSingInClient.signInIntent
-        startActivityForResult(signInClient, RC_SING_IN)
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -97,6 +91,7 @@ class MainActivity : ComponentActivity() {
 
     }
 
+    // Fazendo a autenticação com o Firebase
     private fun firebaseAutWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         mAuth.signInWithCredential(credential)
@@ -106,16 +101,21 @@ class MainActivity : ComponentActivity() {
                     Toast.makeText(this, "Logado com sucesso!", Toast.LENGTH_SHORT).show()
                     setContent {
                         LlasPedidosTheme {
-//                            val user: FirebaseUser = mAuth.currentUser!!
-//                            ProfileScreen(
-//                                profileImage = user.photoUrl!!,
-//                                name = user.displayName!!,
-//                                email = user.email!!,
-//                                signOutClicked = {
-//                                    singOut()
-//                                }
-//                            )
-                            MainScreen()
+                            val user: FirebaseUser = mAuth.currentUser!!
+                            ProfileScreen(
+                                profileImage = user.photoUrl!!,
+                                name = user.displayName!!,
+                                email = user.email!!,
+                                singInAdminCliked = {
+                                    singInAdmin()
+                                },
+                                singInClientCliked = {
+                                    singInClient()
+                                },
+                                signOutClicked = {
+                                    singOut()
+                                }
+                            )
                         }
                     }
                 } else {
@@ -123,6 +123,27 @@ class MainActivity : ComponentActivity() {
                     Toast.makeText(this, "Erro ao logar!", Toast.LENGTH_SHORT).show()
                 }
             }
+    }
+
+    private fun singIn() {
+        val signInClient = googleSingInClient.signInIntent
+        startActivityForResult(signInClient, RC_SING_IN)
+    }
+
+    private fun singInAdmin() {
+        setContent{
+            LlasPedidosTheme {
+                AdminAuth()
+            }
+        }
+    }
+
+    private fun singInClient() {
+        setContent{
+            LlasPedidosTheme {
+                MainScreen()
+            }
+        }
     }
 
     private fun singOut() {
@@ -157,16 +178,16 @@ class MainActivity : ComponentActivity() {
 
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    LlasPedidosTheme {
-        Column (
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-//            GoogleButton {}
-        }
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview() {
+//    LlasPedidosTheme {
+//        Column (
+//            modifier = Modifier.fillMaxSize(),
+//            verticalArrangement = Arrangement.Center,
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
+////            GoogleButton {}
+//        }
+//    }
+//}
