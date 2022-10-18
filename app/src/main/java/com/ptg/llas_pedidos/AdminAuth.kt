@@ -12,6 +12,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -62,10 +63,12 @@ fun AdminAuth() {
             VisualTransformation.None
             else PasswordVisualTransformation()
         )
+
+        val mContext = LocalContext.current
         OutlinedButton(
             onClick = {
                 if (password.equals("Abac@xi123")) {
-                    val intent = Intent()
+                    mContext.startActivity(Intent(mContext, BottomBarScreen::class.java))
                 }
             },
             modifier = Modifier
