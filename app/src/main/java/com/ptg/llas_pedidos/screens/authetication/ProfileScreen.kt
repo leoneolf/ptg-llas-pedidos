@@ -1,20 +1,20 @@
 package com.ptg.llas_pedidos
 
 import android.net.Uri
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.ptg.llas_pedidos.ui.theme.Pink
 
 @Composable
 fun ProfileScreen(
@@ -26,7 +26,9 @@ fun ProfileScreen(
     signOutClicked: () -> Unit
 ) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Pink),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -38,7 +40,8 @@ fun ProfileScreen(
             elevation = 10.dp
         ) {
             AsyncImage(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize(),
                 model = profileImage,
                 contentDescription = "profile_photo",
                 contentScale = ContentScale.FillBounds
@@ -50,17 +53,21 @@ fun ProfileScreen(
                 .fillMaxHeight(0.6f)
                 .padding(top = 60.dp)
         ) {
-            OutlinedTextField(
+            TextField(
+                modifier = Modifier
+                    .background(Color.LightGray),
                 value = name,
                 onValueChange = {},
                 readOnly = true,
                 label = {
-                    Text(text = "Name")
+                    Text(text = "Nome")
                 },
             )
 
-            OutlinedTextField(
-                modifier = Modifier.padding(top = 20.dp),
+            TextField(
+                modifier = Modifier
+                    .padding(top = 20.dp)
+                    .background(Color.LightGray),
                 value = email,
                 onValueChange = {},
                 readOnly = true,

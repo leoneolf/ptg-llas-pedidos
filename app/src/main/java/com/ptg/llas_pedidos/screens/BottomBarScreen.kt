@@ -1,4 +1,4 @@
-package com.ptg.llas_pedidos
+package com.ptg.llas_pedidos.screens
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*

@@ -1,13 +1,11 @@
 package com.ptg.llas_pedidos
 
-import android.content.Intent
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,7 +18,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat.startActivity
+import com.ptg.llas_pedidos.ui.theme.LlasPedidosTheme as LlasPedidosTheme1
 
 @Composable
 fun AdminAuth() {
@@ -66,11 +64,7 @@ fun AdminAuth() {
 
         val mContext = LocalContext.current
         OutlinedButton(
-            onClick = {
-                if (password.equals("Abac@xi123")) {
-                    mContext.startActivity(Intent(mContext, BottomBarScreen::class.java))
-                }
-            },
+            onClick = { },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(35.dp),
@@ -80,6 +74,7 @@ fun AdminAuth() {
         
     }
 }
+
 
 @Composable
 @Preview
@@ -91,6 +86,6 @@ fun AdminAuthPreview() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        AdminAuth()
+        AdminAuth ()
     }
 }

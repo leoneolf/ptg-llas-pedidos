@@ -16,12 +16,13 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.ptg.llas_pedidos.screens.BottomBarScreen
 
 @Composable
-fun MainScreen() {
+fun ClientMainScreen() {
     val navController = rememberNavController()
     Scaffold(
-        bottomBar = { BottomBar(navController = navController)}
+        bottomBar = { ClientBottomBar(navController = navController)}
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -35,20 +36,19 @@ fun MainScreen() {
 
 
 @Composable
-fun BottomBar(navController: NavHostController) {
+fun ClientBottomBar(navController: NavHostController) {
     val screens = listOf(
         BottomBarScreen.Home,
         BottomBarScreen.Cardapio,
         BottomBarScreen.Pedido,
         BottomBarScreen.Suporte,
-        BottomBarScreen.Cliente,
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
     BottomNavigation {
         screens.forEach{ screen ->
-            Additem(
+            ClientAddItem(
                 screen = screen,
                 currentDestination = currentDestination,
                 navController = navController
@@ -59,7 +59,7 @@ fun BottomBar(navController: NavHostController) {
 }
 
 @Composable
-fun RowScope.Additem(
+fun RowScope.ClientAddItem(
     screen: BottomBarScreen,
     currentDestination: NavDestination?,
     navController: NavHostController

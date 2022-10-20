@@ -2,6 +2,7 @@ package com.ptg.llas_pedidos
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,9 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ptg.llas_pedidos.ui.theme.Pink
 
 @Composable
 fun GoogleSignInButton(
@@ -22,10 +25,23 @@ fun GoogleSignInButton(
 ) {
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Pink),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = null,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
         Card(
             modifier = Modifier
                 .padding(start = 30.dp, end = 30.dp)
@@ -38,7 +54,11 @@ fun GoogleSignInButton(
             border = BorderStroke(width = 1.5.dp, color = Color.Black),
             elevation = 5.dp
         ) {
-            Row(modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize(),
+                verticalAlignment = Alignment.CenterVertically)
+            {
                 Image(
                     modifier = Modifier
                         .padding(start = 15.dp)
@@ -52,7 +72,7 @@ fun GoogleSignInButton(
                     modifier = Modifier
                         .padding(start = 20.dp)
                         .align(Alignment.CenterVertically),
-                    text = "Sign In With Google",
+                    text = "Entrar com o Google",
                     fontSize = MaterialTheme.typography.h6.fontSize,
                 )
             }

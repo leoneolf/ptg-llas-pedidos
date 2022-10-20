@@ -6,6 +6,17 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -14,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.ptg.llas_pedidos.ui.theme.LlasPedidosTheme
+import com.ptg.llas_pedidos.ui.theme.Pink
 
 class MainActivity : ComponentActivity() {
 
@@ -133,7 +145,7 @@ class MainActivity : ComponentActivity() {
     private fun singInAdmin() {
         setContent{
             LlasPedidosTheme {
-                AdminAuth()
+                AdminMainScreen()
             }
         }
     }
@@ -141,7 +153,7 @@ class MainActivity : ComponentActivity() {
     private fun singInClient() {
         setContent{
             LlasPedidosTheme {
-                MainScreen()
+                ClientMainScreen()
             }
         }
     }
@@ -178,16 +190,22 @@ class MainActivity : ComponentActivity() {
 
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun DefaultPreview() {
-//    LlasPedidosTheme {
-//        Column (
-//            modifier = Modifier.fillMaxSize(),
-//            verticalArrangement = Arrangement.Center,
-//            horizontalAlignment = Alignment.CenterHorizontally
-//        ) {
-////            GoogleButton {}
-//        }
-//    }
-//}
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    LlasPedidosTheme {
+        Column (
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Pink),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = null,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}
