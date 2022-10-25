@@ -24,6 +24,11 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.ptg.llas_pedidos.data.CreateNewItem
+import com.ptg.llas_pedidos.screens.authetication.AdminAuth
+import com.ptg.llas_pedidos.screens.authetication.GoogleSignInButton
+import com.ptg.llas_pedidos.screens.authetication.ProfileScreen
+import com.ptg.llas_pedidos.screens.screens_master.CardapioScreen
 import com.ptg.llas_pedidos.ui.theme.LlasPedidosTheme
 import com.ptg.llas_pedidos.ui.theme.Pink
 
@@ -145,7 +150,41 @@ class MainActivity : ComponentActivity() {
     private fun singInAdmin() {
         setContent{
             LlasPedidosTheme {
+                AdminAuth (
+                    disgraca = {
+                        test()
+                    }
+                )
+            }
+        }
+    }
+
+    private fun test(){
+        setContent{
+            LlasPedidosTheme {
                 AdminMainScreen()
+                newItem()
+
+            }
+        }
+    }
+
+    private fun newItem() {
+        setContent {
+            LlasPedidosTheme {
+                CardapioScreen (
+                    clik = {
+                        newItemChama()
+                    }
+                )
+            }
+        }
+    }
+
+    private fun newItemChama() {
+        setContent{
+            LlasPedidosTheme {
+                CreateNewItem()
             }
         }
     }

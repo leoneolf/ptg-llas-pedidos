@@ -1,6 +1,6 @@
-package com.ptg.llas_pedidos
+package com.ptg.llas_pedidos.screens.authetication
 
-import androidx.activity.compose.setContent
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -18,10 +18,17 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ptg.llas_pedidos.ui.theme.LlasPedidosTheme as LlasPedidosTheme1
+import androidx.navigation.compose.rememberNavController
+import com.ptg.llas_pedidos.R
 
 @Composable
-fun AdminAuth() {
+fun AdminAuth(
+    disgraca: () -> Unit
+) {
+    val navController = rememberNavController()
+    val context =  LocalContext.current
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -62,9 +69,15 @@ fun AdminAuth() {
             else PasswordVisualTransformation()
         )
 
-        val mContext = LocalContext.current
+//        val mContext = LocalContext.current
         OutlinedButton(
-            onClick = { },
+            onClick = {
+                      if (password.equals("1234")){
+                          disgraca ()
+                      } else {
+                          Toast.makeText(context, "Senha errada!", Toast.LENGTH_SHORT).show()
+                      }
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(35.dp),
@@ -86,6 +99,6 @@ fun AdminAuthPreview() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        AdminAuth ()
+        AdminAuth (){}
     }
 }

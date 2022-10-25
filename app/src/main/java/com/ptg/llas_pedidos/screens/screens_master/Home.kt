@@ -1,4 +1,4 @@
-package com.ptg.llas_pedidos.screens
+package com.ptg.llas_pedidos.screens.screens_master
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -13,15 +13,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun ClienteScreen() {
+fun HomeScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Blue),
+            .background(Color.Magenta),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "CLIENTE",
+            text = "HOME",
             fontSize = MaterialTheme.typography.h3.fontSize,
             fontWeight = FontWeight.Bold,
             color = Color.White
@@ -32,6 +32,6 @@ fun ClienteScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun ClienteScreenPreview() {
-    ClienteScreen()
+fun HomeScreenPreview() {
+    HomeScreen()
 }

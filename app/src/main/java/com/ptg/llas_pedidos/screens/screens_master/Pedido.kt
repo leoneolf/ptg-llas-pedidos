@@ -1,4 +1,4 @@
-package com.ptg.llas_pedidos.screens
+package com.ptg.llas_pedidos.screens.screens_master
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -13,15 +13,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun CardapioScreen() {
+fun PedidoScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Cyan),
+            .background(Color.Yellow),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "CARDÁPIO",
+            text = "PEDIDO",
             fontSize = MaterialTheme.typography.h3.fontSize,
             fontWeight = FontWeight.Bold,
             color = Color.White
@@ -32,6 +32,6 @@ fun CardapioScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun CardapioScreenPreview() {
-    CardapioScreen()
+fun PedidoScreenPreview() {
+    PedidoScreen()
 }

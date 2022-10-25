@@ -4,7 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.ptg.llas_pedidos.data.CreateNewItem
 import com.ptg.llas_pedidos.screens.*
+import com.ptg.llas_pedidos.screens.screens_master.*
 
 @Composable
 fun BottomNavGraph(navController: NavHostController) {
@@ -16,7 +18,7 @@ fun BottomNavGraph(navController: NavHostController) {
             HomeScreen()
         }
         composable(route = BottomBarScreen.Cardapio.route) {
-            CardapioScreen()
+            CardapioScreen {}
         }
         composable(route = BottomBarScreen.Pedido.route) {
             PedidoScreen()
