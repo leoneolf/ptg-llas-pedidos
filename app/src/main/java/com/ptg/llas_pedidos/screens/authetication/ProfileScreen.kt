@@ -75,36 +75,33 @@ fun ProfileScreen(
                     Text(text = "Email")
                 },
             )
-            Column {
-                Button(
-                    modifier = Modifier
-                        .align(CenterHorizontally)
-                        .padding(top = 10.dp),
-                    onClick = { singInAdminCliked() }
-                ) {
-                    Text(text = "Entrar como Admin")
-                }
+            Button(
+                modifier = Modifier
+                    .align(CenterHorizontally)
+                    .padding(top = 10.dp),
+                onClick = { singInAdminCliked() }
+            ) {
+                Text(text = "Entrar como Admin")
+            }
 
-                Button(
-                    modifier = Modifier
-                        .align(CenterHorizontally)
-                        .padding(top = 10.dp),
-                    onClick = { singInClientCliked() }
-                ) {
-                    Text(text = "Entrar como Cliente")
-                }
+            Button(
+                modifier = Modifier
+                    .align(CenterHorizontally)
+                    .padding(top = 10.dp),
+                onClick = { singInClientCliked() }
+            ) {
+                Text(text = "Entrar como Cliente")
+            }
 
-                Button(
-                    modifier = Modifier
-                        .align(CenterHorizontally)
-                        .padding(top = 10.dp),
-                    onClick = { signOutClicked() }
-                ) {
-                    Text(text = "LogOut")
-                }
+            Button(
+                modifier = Modifier
+                    .align(CenterHorizontally)
+                    .padding(top = 10.dp),
+                onClick = { signOutClicked() }
+            ) {
+                Text(text = "LogOut")
             }
         }
-
     }
 }
 

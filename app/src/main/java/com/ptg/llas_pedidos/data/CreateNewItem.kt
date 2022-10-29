@@ -3,7 +3,10 @@ package com.ptg.llas_pedidos.data
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -22,12 +25,12 @@ import com.ptg.llas_pedidos.ui.theme.Pink
 @Composable
 fun CreateNewItem() {
     val db = Firebase.firestore
-    val context =  LocalContext.current
+    val context = LocalContext.current
 
-    var itemName by remember { mutableStateOf( "") }
-    var itemDescription by remember { mutableStateOf( "") }
-    var check by remember { mutableStateOf<Boolean>( false) }
-    var report by remember { mutableStateOf( "") }
+    var itemName by remember { mutableStateOf("") }
+    var itemDescription by remember { mutableStateOf("") }
+    var check by remember { mutableStateOf<Boolean>(false) }
+    var report by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -46,7 +49,7 @@ fun CreateNewItem() {
 
         OutlinedTextField(
             value = itemName,
-            onValueChange = { itemName=it },
+            onValueChange = { itemName = it },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
@@ -63,7 +66,7 @@ fun CreateNewItem() {
 
         OutlinedTextField(
             value = itemDescription,
-            onValueChange = { itemDescription=it },
+            onValueChange = { itemDescription = it },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
@@ -81,7 +84,7 @@ fun CreateNewItem() {
         Row() {
             OutlinedButton(
                 onClick = {
-                    if (itemName.isNotEmpty() && itemDescription.isNotEmpty()){
+                    if (itemName.isNotEmpty() && itemDescription.isNotEmpty()) {
                         // Create a new user with a first and last name
                         val item = hashMapOf(
                             "nome" to itemName,
@@ -92,18 +95,24 @@ fun CreateNewItem() {
                         db.collection("itens")
                             .add(item)
                             .addOnSuccessListener { documentReference ->
-                                Toast.makeText(context, "Item criado com sucesso, com o ID: ${documentReference.id}", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "Item criado com sucesso, com o ID: ${documentReference.id}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                             .addOnFailureListener { e ->
                                 Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show()
                             }
                     } else {
-                        Toast.makeText(context, "Erro ao adicionar o item", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Erro ao adicionar o item", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
             ) {
                 Text(text = "Adicionar", fontSize = 16.sp, color = Color.Black)
             }
+
             OutlinedButton(
                 onClick = {
                     val data = StringBuffer()
@@ -114,7 +123,7 @@ fun CreateNewItem() {
                                 data.append("ID = " + document.id + "\n")
                                 data.append("Nome = " + document.get("nome") + "\n")
                                 data.append("Descrição = " + document.get("descricao") + "\n")
-                                data.append("===============================================\n")
+                                data.append("==============================================\n")
                             }
 
                             check = true
@@ -146,12 +155,30 @@ fun CreateNewItem() {
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        AnimatedVisibility(visible = check, Modifier.fillMaxWidth()) {
-            Text(text = report, fontSize = 14.sp, color = Color.Black)
+        val scrollState = rememberScrollState()
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .scrollable(
+                    state = scrollState,
+                    orientation = Orientation.Vertical
+                )
+        ) {
+            AnimatedVisibility(visible = check, Modifier.fillMaxWidth()) {
+                Text(
+                    modifier = Modifier,
+                    text = report,
+                    fontSize = 16.sp,
+                    color = Color.Black
+                )
+            }
         }
 
     }
+
 }
+
 
 
 @Preview
