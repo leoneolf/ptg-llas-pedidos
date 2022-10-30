@@ -1,4 +1,4 @@
-package com.ptg.llas_pedidos.screens.authetication
+package com.ptg.llas_pedidos.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -20,8 +20,8 @@ import com.ptg.llas_pedidos.R
 import com.ptg.llas_pedidos.ui.theme.Pink
 
 @Composable
-fun GoogleSignInButton(
-    signInClicked: () -> Unit
+fun SingInButton(
+    onSingInClick: () -> Unit
 ) {
 
     Column(
@@ -31,24 +31,13 @@ fun GoogleSignInButton(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = null,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
         Card(
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(start = 30.dp, end = 30.dp)
                 .height(55.dp)
-                .fillMaxWidth()
                 .clickable {
-                    signInClicked()
+                    onSingInClick()
                 },
             shape = RoundedCornerShape(10.dp),
             border = BorderStroke(width = 1.5.dp, color = Color.Black),
@@ -57,8 +46,8 @@ fun GoogleSignInButton(
             Row(
                 modifier = Modifier
                     .fillMaxSize(),
-                verticalAlignment = Alignment.CenterVertically)
-            {
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Image(
                     modifier = Modifier
                         .padding(start = 15.dp)
@@ -73,15 +62,16 @@ fun GoogleSignInButton(
                         .padding(start = 20.dp)
                         .align(Alignment.CenterVertically),
                     text = "Entrar com o Google",
-                    fontSize = MaterialTheme.typography.h6.fontSize,
+                    fontSize = MaterialTheme.typography.h6.fontSize
                 )
             }
         }
     }
+
 }
 
-@Composable
 @Preview
-private fun GoogleSignInButtonPreview() {
-    GoogleSignInButton{}
+@Composable
+private fun SingInButtonView() {
+    SingInButton{}
 }

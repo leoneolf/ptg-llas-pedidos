@@ -47,13 +47,13 @@ fun ViewContentPreview() {
     }
 }
 
-//@Preview
-//@Composable
-//fun HomeViewContentPreview() {
-//    LlasPedidosTheme(darkTheme = false) {
-//        HomeViewContent(rememberNavController())
-//    }
-//}
+@Preview
+@Composable
+fun HomeViewContentPreview() {
+    LlasPedidosTheme(darkTheme = false) {
+        MainViewContent(rememberNavController())
+    }
+}
 
 @Composable
 fun LoginContent(
@@ -98,7 +98,7 @@ fun LoginContent(
 @Preview
 @Composable
 fun LoginContentPreview() {
-    LlasPedidosTheme(darkTheme = false) {
+    LlasPedidosTheme() {
         LoginContent({},{},{})
     }
 }

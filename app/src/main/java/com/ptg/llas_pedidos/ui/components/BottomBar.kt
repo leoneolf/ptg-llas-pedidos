@@ -26,45 +26,31 @@ sealed class BottomBarConfigItem(
     val title: String,
     val icon: ImageVector
 ) {
-    object Home : BottomBarConfigItem(
-        route = AppGraph.main.HOME,
-        title = "Home",
-        icon = Icons.Default.Home
-    )
-
     object Menu : BottomBarConfigItem(
-        route = AppGraph.main.MENU,
+        route = AppGraph.master.MENU,
         title = "Cardápio",
         icon = Icons.Default.Menu
     )
 
     object Order : BottomBarConfigItem(
-        route = AppGraph.main.ORDER,
+        route = AppGraph.master.ORDER,
         title = "Pedido",
         icon = Icons.Default.ShoppingCart
     )
 
     object Support : BottomBarConfigItem(
-        route = AppGraph.main.SUPPORT,
+        route = AppGraph.master.SUPPORT,
         title = "Suporte",
         icon = Icons.Default.Info
-    )
-
-    object Client : BottomBarConfigItem(
-        route = AppGraph.main.CLIENT,
-        title = "Cliente",
-        icon = Icons.Default.Person
     )
 }
 
 //Lista de todas as configurações de rotas da barra de navegação
 object BottomBarConfigLis {
     val all = listOf(
-        BottomBarConfigItem.Home,
         BottomBarConfigItem.Menu,
         BottomBarConfigItem.Order,
-        BottomBarConfigItem.Support,
-        BottomBarConfigItem.Client
+        BottomBarConfigItem.Support
     )
 }
 

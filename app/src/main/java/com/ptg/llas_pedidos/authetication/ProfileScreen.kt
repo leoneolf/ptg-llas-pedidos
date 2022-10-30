@@ -1,4 +1,4 @@
-package com.ptg.llas_pedidos.screens.authetication
+package com.ptg.llas_pedidos.authetication
 
 import android.net.Uri
 import androidx.compose.foundation.background
