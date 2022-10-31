@@ -21,8 +21,11 @@ fun RootNavigationGraph(navController: NavHostController) {
         startDestination = AppGraph.auth.ROOT
     ) {
         authNavGraph(navController = navController)
-        composable(route = AppGraph.main.ROOT) {
-            MainViewContent()
+        composable(route = AppGraph.master.ROOT) {
+            MasterViewContent()
+        }
+        composable(route = AppGraph.client.ROOT) {
+            ClientViewContent()
         }
     }
 }
@@ -33,84 +36,88 @@ fun NavGraphBuilder.authNavGraph(navController: NavController) {
         startDestination = AppGraph.auth.LOGIN
     ) {
         composable(route = AppGraph.auth.LOGIN) {
+            TesteSingInButton {
+                navController.popBackStack()
+                navController.navigate(AppGraph.auth.AUTH)
+            }
+        }
+        composable(route = AppGraph.auth.AUTH) {
             LoginContent(
                 onLoginClick = {
-                    navController.popBackStack()
-                    navController.navigate(AppGraph.main.ROOT)
+                    navController.navigate(AppGraph.master.ROOT)
                 },
-                onSingUpClick = { navController.navigate(AppGraph.auth.SING_UP) },
-                onSingOutClick = { navController.navigate(AppGraph.auth.SING_OUT) }
+                onSingUpClick = {
+                    navController.navigate(AppGraph.client.ROOT)
+                }
             )
-        }
-        composable(route = AppGraph.auth.SING_UP) {
-            ViewContent(name = "Sing Up") {}
-        }
-        composable(route = AppGraph.auth.SING_OUT) {
-            ViewContent(name = "Sing Out") {}
         }
     }
 }
 
+//private fun MainActivity.Companion.singIn() {
+//    val googleSingInClient
+//    val signInClient = googleSingInClient.signInIntent
+//    startActivityForResult(signInClient, RC_SING_IN)
+//}
+
 @Composable
-fun MainNavGraph(navController: NavHostController) {
+fun MasterNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        route = AppGraph.main.ROOT,
-        startDestination = AppGraph.main.HOME
+        route = AppGraph.master.ROOT,
+        startDestination = AppGraph.master.MENU
     ) {
-        composable(route = AppGraph.main.HOME) {
-            ViewContent(
-                name = "Home",
-                onClick = {
-                    navController.navigate(AppGraph.detailsHome.ROOT)
-                }
-            )
-        }
-        composable(route = AppGraph.main.MENU) {
+        composable(route = AppGraph.master.MENU) {
             ViewContent(
                 name = "Menu",
                 onClick = {}
             )
         }
-        composable(route = AppGraph.main.ORDER) {
+        composable(route = AppGraph.master.ORDER) {
             ViewContent(
                 name = "Pedido",
                 onClick = {}
             )
         }
-        composable(route = AppGraph.main.SUPPORT) {
+        composable(route = AppGraph.master.SUPPORT) {
             ViewContent(
                 name = "Suporte",
                 onClick = {}
             )
         }
-        composable(route = AppGraph.main.CLIENT) {
-            ViewContent(
-                name = "Cliente",
-                onClick = {}
-            )
-        }
-        detailsHomeGraph(navController = navController)
     }
 }
 
-fun NavGraphBuilder.detailsHomeGraph(navController: NavController) {
-    navigation(
-        route = AppGraph.detailsHome.ROOT,
-        startDestination = AppGraph.detailsHome.HELP
+@Composable
+fun ClientNavGraph(navController: NavHostController) {
+    NavHost(
+        navController = navController,
+        route = AppGraph.client.ROOT,
+        startDestination = AppGraph.client.HOME
     ) {
-        composable(route = AppGraph.detailsHome.HELP) {
-            ViewContent(name = "Help") {
-                navController.navigate(AppGraph.detailsHome.FAQ)
-            }
+        composable(route = AppGraph.client.HOME) {
+            ViewContent(
+                name = "Home",
+                onClick = {}
+            )
         }
-        composable(route = AppGraph.detailsHome.FAQ) {
-            ViewContent(name = "Faq") {
-                navController.popBackStack(
-                    route = AppGraph.detailsHome.FAQ,
-                    inclusive = false
-                )
-            }
+        composable(route = AppGraph.client.MENU) {
+            ViewContent(
+                name = "Menu",
+                onClick = {}
+            )
+        }
+        composable(route = AppGraph.client.ORDER) {
+            ViewContent(
+                name = "Pedido",
+                onClick = {}
+            )
+        }
+        composable(route = AppGraph.client.SUPPORT) {
+            ViewContent(
+                name = "Suporte",
+                onClick = {}
+            )
         }
     }
 }

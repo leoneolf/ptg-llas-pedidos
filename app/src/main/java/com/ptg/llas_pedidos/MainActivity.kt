@@ -1,21 +1,13 @@
 package com.ptg.llas_pedidos
 
+//import com.ptg.llas_pedidos.authetication.GoogleSignInButton
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -25,24 +17,22 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.ptg.llas_pedidos.authetication.AdminAuth
+import com.ptg.llas_pedidos.authetication.ProfileScreen
 import com.ptg.llas_pedidos.data.CreateNewItem
 import com.ptg.llas_pedidos.navigation.RootNavigationGraph
-import com.ptg.llas_pedidos.navigation.ViewContent
-import com.ptg.llas_pedidos.authetication.AdminAuth
-//import com.ptg.llas_pedidos.authetication.GoogleSignInButton
-import com.ptg.llas_pedidos.authetication.ProfileScreen
 import com.ptg.llas_pedidos.screens.screens_master.CardapioScreen
+import com.ptg.llas_pedidos.ui.components.SingInButton
 import com.ptg.llas_pedidos.ui.theme.LlasPedidosTheme
-import com.ptg.llas_pedidos.ui.theme.Pink
 
 class MainActivity : ComponentActivity() {
 
-//    companion object {
-//        const val RC_SING_IN = 100
-//    }
-//
-//    private lateinit var mAuth: FirebaseAuth
-//    private lateinit var googleSingInClient: GoogleSignInClient
+    companion object {
+        const val RC_SING_IN = 100
+    }
+
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var googleSingInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +41,7 @@ class MainActivity : ComponentActivity() {
                 RootNavigationGraph(navController = rememberNavController())
             }
         }
-    }
-}
+
 
 //        //Instância do Firebase Auth
 //        mAuth = FirebaseAuth.getInstance()
@@ -69,7 +58,7 @@ class MainActivity : ComponentActivity() {
 //            LlasPedidosTheme {
 //
 //                if (mAuth.currentUser == null) {
-//                    GoogleSignInButton {
+//                    SingInButton {
 //                        singIn()
 //                    }
 //                } else {
@@ -126,25 +115,25 @@ class MainActivity : ComponentActivity() {
 //                if (task.isSuccessful) {
 //                    //Logado com sucesso
 //                    Toast.makeText(this, "Logado com sucesso!", Toast.LENGTH_SHORT).show()
-//                    setContent {
-//                        LlasPedidosTheme {
-//                            val user: FirebaseUser = mAuth.currentUser!!
-//                            ProfileScreen(
-//                                profileImage = user.photoUrl!!,
-//                                name = user.displayName!!,
-//                                email = user.email!!,
-//                                singInAdminCliked = {
-//                                    singInAdmin()
-//                                },
-//                                singInClientCliked = {
-//                                    singInClient()
-//                                },
-//                                signOutClicked = {
-//                                    singOut()
-//                                }
-//                            )
-//                        }
-//                    }
+////                    setContent {
+////                        LlasPedidosTheme {
+////                            val user: FirebaseUser = mAuth.currentUser!!
+////                            ProfileScreen(
+////                                profileImage = user.photoUrl!!,
+////                                name = user.displayName!!,
+////                                email = user.email!!,
+////                                singInAdminCliked = {
+////                                    singInAdmin()
+////                                },
+////                                singInClientCliked = {
+////                                    singInClient()
+////                                },
+////                                signOutClicked = {
+////                                    singOut()
+////                                }
+////                            )
+////                        }
+////                    }
 //                } else {
 //                    //Error ao logar
 //                    Toast.makeText(this, "Erro ao logar!", Toast.LENGTH_SHORT).show()
@@ -155,12 +144,18 @@ class MainActivity : ComponentActivity() {
 //    private fun singIn() {
 //        val signInClient = googleSingInClient.signInIntent
 //        startActivityForResult(signInClient, RC_SING_IN)
+//        setContent {
+//            LlasPedidosTheme {
+//                RootNavigationGraph(navController = rememberNavController())
+//            }
+//        }
+//
 //    }
 //
 //    private fun singInAdmin() {
-//        setContent{
+//        setContent {
 //            LlasPedidosTheme {
-//                AdminAuth (
+//                AdminAuth(
 //                    disgraca = {
 //                        test()
 //                    }
@@ -169,8 +164,8 @@ class MainActivity : ComponentActivity() {
 //        }
 //    }
 //
-//    private fun test(){
-//        setContent{
+//    private fun test() {
+//        setContent {
 //            LlasPedidosTheme {
 //                AdminMainScreen()
 //                newItem()
@@ -182,7 +177,7 @@ class MainActivity : ComponentActivity() {
 //    private fun newItem() {
 //        setContent {
 //            LlasPedidosTheme {
-//                CardapioScreen (
+//                CardapioScreen(
 //                    clik = {
 //                        newItemChama()
 //                    }
@@ -192,7 +187,7 @@ class MainActivity : ComponentActivity() {
 //    }
 //
 //    private fun newItemChama() {
-//        setContent{
+//        setContent {
 //            LlasPedidosTheme {
 //                CreateNewItem()
 //            }
@@ -200,7 +195,7 @@ class MainActivity : ComponentActivity() {
 //    }
 //
 //    private fun singInClient() {
-//        setContent{
+//        setContent {
 //            LlasPedidosTheme {
 //                ClientMainScreen()
 //            }
@@ -226,35 +221,35 @@ class MainActivity : ComponentActivity() {
 //                Toast.makeText(this, "Desconectado com sucesso!", Toast.LENGTH_SHORT).show()
 //                setContent {
 //                    LlasPedidosTheme {
-//                        GoogleSignInButton {
-//                            singIn()
-//                        }
+////                        GoogleSignInButton {
+////                            singIn()
+////                        }
 //                    }
 //                }
 //            }
 //            .addOnFailureListener {
 //                Toast.makeText(this, "Falha ao desconectar!", Toast.LENGTH_SHORT).show()
 //            }
-//    }
+    }
 
-//}
+}
 
-//@Preview(showBackground = true)
-//@Composable
-//fun DefaultPreview() {
-//    LlasPedidosTheme {
-////        Column (
-////            modifier = Modifier
-////                .fillMaxSize()
-////                .background(Pink),
-////            verticalArrangement = Arrangement.Center,
-////            horizontalAlignment = Alignment.CenterHorizontally
-////        ){
-////            Image(
-////                painter = painterResource(id = R.drawable.logo),
-////                contentDescription = null,
-////                modifier = Modifier.fillMaxWidth()
-////            )
-////        }
-//    }
-//}
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    LlasPedidosTheme {
+//        Column (
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .background(Pink),
+//            verticalArrangement = Arrangement.Center,
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ){
+//            Image(
+//                painter = painterResource(id = R.drawable.logo),
+//                contentDescription = null,
+//                modifier = Modifier.fillMaxWidth()
+//            )
+//        }
+    }
+}
