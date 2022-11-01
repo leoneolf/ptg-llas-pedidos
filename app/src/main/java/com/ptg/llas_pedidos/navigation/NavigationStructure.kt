@@ -10,6 +10,7 @@ object AuthGraph {
     const val ROOT = "auth_graph"
     const val LOGIN = "login"
     const val AUTH = "auth"
+    const val OPTIONS = "options"
 }
 
 //Root e telas do Master para fazer a navegação

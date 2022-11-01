@@ -1,6 +1,5 @@
 package com.ptg.llas_pedidos
 
-//import com.ptg.llas_pedidos.authetication.GoogleSignInButton
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -15,14 +14,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.ptg.llas_pedidos.authetication.AdminAuth
-import com.ptg.llas_pedidos.authetication.ProfileScreen
 import com.ptg.llas_pedidos.data.CreateNewItem
 import com.ptg.llas_pedidos.navigation.RootNavigationGraph
-import com.ptg.llas_pedidos.screens.screens_master.CardapioScreen
-import com.ptg.llas_pedidos.ui.components.SingInButton
 import com.ptg.llas_pedidos.ui.theme.LlasPedidosTheme
 
 class MainActivity : ComponentActivity() {
@@ -40,9 +35,10 @@ class MainActivity : ComponentActivity() {
             LlasPedidosTheme {
                 RootNavigationGraph(navController = rememberNavController())
             }
+
         }
 
-
+    }}
 //        //Instância do Firebase Auth
 //        mAuth = FirebaseAuth.getInstance()
 //
@@ -54,33 +50,33 @@ class MainActivity : ComponentActivity() {
 //
 //        googleSingInClient = GoogleSignIn.getClient(this, gso)
 //
-//        setContent {
-//            LlasPedidosTheme {
-//
-//                if (mAuth.currentUser == null) {
-//                    SingInButton {
-//                        singIn()
-//                    }
-//                } else {
-//                    val user: FirebaseUser = mAuth.currentUser!!
-//                    ProfileScreen(
-//                        profileImage = user.photoUrl!!,
-//                        name = user.displayName!!,
-//                        email = user.email!!,
-//                        singInAdminCliked = {
-//                            singInAdmin()
-//                        },
-//                        singInClientCliked = {
-//                            singInClient()
-//                        },
-//                        signOutClicked = {
-//                            singOut()
-//                        }
-//                    )
-//                }
-//
-//            }
-//        }
+////        setContent {
+////            LlasPedidosTheme {
+////
+////                if (mAuth.currentUser == null) {
+////                    SingInButton {
+////                        singIn()
+////                    }
+////                } else {
+////                    val user: FirebaseUser = mAuth.currentUser!!
+////                    ProfileScreen(
+////                        profileImage = user.photoUrl!!,
+////                        name = user.displayName!!,
+////                        email = user.email!!,
+////                        singInAdminCliked = {
+////                            singInAdmin()
+////                        },
+////                        singInClientCliked = {
+////                            singInClient()
+////                        },
+////                        signOutClicked = {
+////                            singOut()
+////                        }
+////                    )
+////                }
+////
+////            }
+////        }
 //    }
 //
 //
@@ -141,15 +137,10 @@ class MainActivity : ComponentActivity() {
 //            }
 //    }
 //
-//    private fun singIn() {
+//    fun singIn() {
 //        val signInClient = googleSingInClient.signInIntent
 //        startActivityForResult(signInClient, RC_SING_IN)
-//        setContent {
-//            LlasPedidosTheme {
-//                RootNavigationGraph(navController = rememberNavController())
-//            }
-//        }
-//
+////        RootNavigationGraph(navController = rememberNavController())
 //    }
 //
 //    private fun singInAdmin() {
@@ -167,7 +158,7 @@ class MainActivity : ComponentActivity() {
 //    private fun test() {
 //        setContent {
 //            LlasPedidosTheme {
-//                AdminMainScreen()
+////                AdminMainScreen()
 //                newItem()
 //
 //            }
@@ -177,11 +168,11 @@ class MainActivity : ComponentActivity() {
 //    private fun newItem() {
 //        setContent {
 //            LlasPedidosTheme {
-//                CardapioScreen(
-//                    clik = {
-//                        newItemChama()
-//                    }
-//                )
+////                CardapioScreen(
+////                    clik = {
+////                        newItemChama()
+////                    }
+////                )
 //            }
 //        }
 //    }
@@ -197,7 +188,7 @@ class MainActivity : ComponentActivity() {
 //    private fun singInClient() {
 //        setContent {
 //            LlasPedidosTheme {
-//                ClientMainScreen()
+////                ClientMainScreen()
 //            }
 //        }
 //    }
@@ -219,37 +210,37 @@ class MainActivity : ComponentActivity() {
 //        googleSignInClient.signOut()
 //            .addOnSuccessListener {
 //                Toast.makeText(this, "Desconectado com sucesso!", Toast.LENGTH_SHORT).show()
-//                setContent {
-//                    LlasPedidosTheme {
-////                        GoogleSignInButton {
-////                            singIn()
-////                        }
-//                    }
-//                }
+////                setContent {
+////                    LlasPedidosTheme {
+//////                        GoogleSignInButton {
+//////                            singIn()
+//////                        }
+////                    }
+////                }
 //            }
 //            .addOnFailureListener {
 //                Toast.makeText(this, "Falha ao desconectar!", Toast.LENGTH_SHORT).show()
 //            }
-    }
-
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    LlasPedidosTheme {
-//        Column (
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .background(Pink),
-//            verticalArrangement = Arrangement.Center,
-//            horizontalAlignment = Alignment.CenterHorizontally
-//        ){
-//            Image(
-//                painter = painterResource(id = R.drawable.logo),
-//                contentDescription = null,
-//                modifier = Modifier.fillMaxWidth()
-//            )
-//        }
-    }
-}
+//    }
+//
+//}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview() {
+//    LlasPedidosTheme {
+////        Column (
+////            modifier = Modifier
+////                .fillMaxSize()
+////                .background(Pink),
+////            verticalArrangement = Arrangement.Center,
+////            horizontalAlignment = Alignment.CenterHorizontally
+////        ){
+////            Image(
+////                painter = painterResource(id = R.drawable.logo),
+////                contentDescription = null,
+////                modifier = Modifier.fillMaxWidth()
+////            )
+////        }
+//    }
+//}
