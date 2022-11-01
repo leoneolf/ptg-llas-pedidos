@@ -24,7 +24,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ptg.llas_pedidos.R
-import com.ptg.llas_pedidos.ui.components.BottomBar
+import com.ptg.llas_pedidos.ui.components.BottomBarClient
+import com.ptg.llas_pedidos.ui.components.BottomBarMaster
 import com.ptg.llas_pedidos.ui.theme.LlasPedidosTheme
 import com.ptg.llas_pedidos.ui.theme.Pink
 
@@ -163,7 +164,7 @@ private fun TesteSingInButtonView() {
 @Composable
 fun MasterViewContent(navController: NavHostController = rememberNavController()) {
     Scaffold(
-        bottomBar = { BottomBar(navController = navController)}
+        bottomBar = { BottomBarMaster(navController = navController)}
     ) {
         MasterNavGraph(navController = navController)
     }
@@ -174,7 +175,7 @@ fun MasterViewContent(navController: NavHostController = rememberNavController()
 @Composable
 fun ClientViewContent(navController: NavHostController = rememberNavController()) {
     Scaffold(
-        bottomBar = { BottomBar(navController = navController)}
+        bottomBar = { BottomBarClient(navController = navController)}
     ) {
         ClientNavGraph(navController = navController)
     }
