@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.ptg.llas_pedidos.MainActivity
+import com.ptg.llas_pedidos.ui.components.AdminSingIn
 import com.ptg.llas_pedidos.ui.components.AuthenticationButton
 import com.ptg.llas_pedidos.ui.components.SingInButton
 
@@ -36,14 +37,8 @@ fun RootNavigationGraph(navController: NavHostController) {
 fun NavGraphBuilder.authNavGraph(navController: NavController) {
     navigation(
         route = AppGraph.auth.ROOT,
-        startDestination = AppGraph.auth.LOGIN
+        startDestination = AppGraph.auth.OPTIONS
     ) {
-        composable(route = AppGraph.auth.LOGIN) {
-            SingInButton {
-                navController.popBackStack()
-                navController.navigate(AppGraph.auth.OPTIONS)
-            }
-        }
         composable(route = AppGraph.auth.OPTIONS) {
             AuthenticationButton(
                 singInAdminCliked = {
@@ -51,29 +46,17 @@ fun NavGraphBuilder.authNavGraph(navController: NavController) {
                     navController.navigate(AppGraph.auth.AUTH)
                 },
                 singInClientCliked = {
-                    navController.popBackStack()
                     navController.navigate(AppGraph.client.ROOT)
-                },
-                signOutClicked = {
-                    navController.navigate(AppGraph.initial.ROOT)
                 }
             )
         }
         composable(AppGraph.auth.AUTH) {
-            SingInButton {
-                navController.popBackStack()
+            AdminSingIn {
                 navController.navigate(AppGraph.master.ROOT)
             }
         }
     }
 }
-
-
-//private fun MainActivity.Companion.singIn() {
-//    val googleSingInClient
-//    val signInClient = googleSingInClient.signInIntent
-//    startActivityForResult(signInClient, RC_SING_IN)
-//}
 
 @Composable
 fun MasterNavGraph(navController: NavHostController) {

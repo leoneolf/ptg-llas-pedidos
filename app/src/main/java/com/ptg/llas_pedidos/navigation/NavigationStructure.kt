@@ -8,7 +8,7 @@ package com.ptg.llas_pedidos.navigation
 //Root inicial, quando abre o app
 object AuthGraph {
     const val ROOT = "auth_graph"
-    const val LOGIN = "login"
+//    const val LOGIN = "login"
     const val AUTH = "auth"
     const val OPTIONS = "options"
 }

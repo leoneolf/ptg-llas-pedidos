@@ -14,8 +14,7 @@ import com.ptg.llas_pedidos.ui.theme.Pink
 @Composable
 fun AuthenticationButton(
     singInAdminCliked: () -> Unit,
-    singInClientCliked: () -> Unit,
-    signOutClicked: () -> Unit
+    singInClientCliked: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -50,17 +49,6 @@ fun AuthenticationButton(
             }
 
             Spacer(modifier = Modifier.height(10.dp))
-
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.CenterHorizontally),
-                onClick = { signOutClicked() }
-            ){
-                Text(text = "LogOut")
-            }
-
-            Spacer(modifier = Modifier.height(10.dp))
         }
     }
 }
@@ -68,5 +56,5 @@ fun AuthenticationButton(
 @Composable
 @Preview
 private fun AuthenticationButtonPreview() {
-    AuthenticationButton({},{},{})
+    AuthenticationButton({},{})
 }

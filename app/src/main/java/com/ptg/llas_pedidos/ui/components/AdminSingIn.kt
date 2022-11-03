@@ -1,4 +1,4 @@
-package com.ptg.llas_pedidos.authetication
+package com.ptg.llas_pedidos.ui.components
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -22,12 +22,10 @@ import androidx.navigation.compose.rememberNavController
 import com.ptg.llas_pedidos.R
 
 @Composable
-fun AdminAuth(
-    disgraca: () -> Unit
+fun AdminSingIn(
+    onAdminSingInClick: () -> Unit
 ) {
-    val navController = rememberNavController()
-    val context =  LocalContext.current
-
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -38,14 +36,14 @@ fun AdminAuth(
     ) {
         var password by rememberSaveable { mutableStateOf("") }
         var passawordVisibility by remember { mutableStateOf(false) }
-        
+
         val icon = if (passawordVisibility)
             painterResource(id = R.drawable.ic_visibility)
         else
             painterResource(id = R.drawable.ic_visibility_off)
         Text(text = "Insira a senha do usuário Master:", fontSize = 15.sp)
         OutlinedTextField(
-            value = password, 
+            value = password,
             onValueChange = {
                 password = it
             },
@@ -65,18 +63,17 @@ fun AdminAuth(
                 keyboardType = KeyboardType.Password
             ),
             visualTransformation = if (passawordVisibility)
-            VisualTransformation.None
+                VisualTransformation.None
             else PasswordVisualTransformation()
         )
 
-//        val mContext = LocalContext.current
         OutlinedButton(
             onClick = {
-                      if (password.equals("1234")){
-                          disgraca ()
-                      } else {
-                          Toast.makeText(context, "Senha errada!", Toast.LENGTH_SHORT).show()
-                      }
+                if (password.equals("masterTeste")) {
+                    onAdminSingInClick()
+                } else {
+                    Toast.makeText(context, "Senha errada! Tente novamente.", Toast.LENGTH_SHORT).show()
+                }
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -84,7 +81,7 @@ fun AdminAuth(
         ) {
             Text(text = "Entrar")
         }
-        
+
     }
 }
 
@@ -99,6 +96,6 @@ fun AdminAuthPreview() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        AdminAuth (){}
+        AdminSingIn() {}
     }
 }
