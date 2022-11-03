@@ -151,8 +151,8 @@ class MainActivity : ComponentActivity() {
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    LlasPedidosTheme {}
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview() {
+//    LlasPedidosTheme {}
+//}
