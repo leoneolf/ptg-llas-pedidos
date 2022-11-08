@@ -10,6 +10,7 @@ import androidx.navigation.navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.ptg.llas_pedidos.MainActivity
+import com.ptg.llas_pedidos.data.CreateNewItem
 import com.ptg.llas_pedidos.ui.components.AdminSingIn
 import com.ptg.llas_pedidos.ui.components.AuthenticationButton
 import com.ptg.llas_pedidos.ui.components.ClientHomeScreen
@@ -45,7 +46,10 @@ fun NavGraphBuilder.authNavGraph(navController: NavController) {
         composable(route = AppGraph.auth.OPTIONS) {
             AuthenticationButton(
                 singInAdminCliked = {
-                    navController.popBackStack()
+                    navController.popBackStack(
+                        route = AppGraph.auth.OPTIONS,
+                        inclusive = false
+                    )
                     navController.navigate(AppGraph.auth.AUTH)
                 },
                 singInClientCliked = {
@@ -69,12 +73,7 @@ fun MasterNavGraph(navController: NavHostController) {
         startDestination = AppGraph.master.MENU
     ) {
         composable(route = AppGraph.master.MENU) {
-            ViewContent(
-                name = "Menu",
-                onClick = {
-                    navController.navigate(AppGraph.masterMenu.ROOT)
-                }
-            )
+            CreateNewItem()
         }
         composable(route = AppGraph.master.ORDER) {
             ViewContent(
