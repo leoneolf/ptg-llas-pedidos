@@ -1,4 +1,4 @@
-//package com.ptg.llas_pedidos
+package com.ptg.llas_pedidos.lixo.screens//package com.ptg.llas_pedidos
 //
 //import androidx.compose.foundation.layout.Column
 //import androidx.compose.foundation.layout.RowScope
