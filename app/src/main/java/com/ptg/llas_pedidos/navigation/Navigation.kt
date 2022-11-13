@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.ptg.llas_pedidos.MainActivity
 import com.ptg.llas_pedidos.data.CreateNewItem
+import com.ptg.llas_pedidos.presentation.books.BooksScreen
 import com.ptg.llas_pedidos.ui.components.AdminSingIn
 import com.ptg.llas_pedidos.ui.components.AuthenticationButton
 import com.ptg.llas_pedidos.ui.components.ClientHomeScreen
@@ -74,6 +75,7 @@ fun MasterNavGraph(navController: NavHostController) {
     ) {
         composable(route = AppGraph.master.MENU) {
 //            CreateNewItem()
+            BooksScreen()
         }
         composable(route = AppGraph.master.ORDER) {
             ViewContent(
