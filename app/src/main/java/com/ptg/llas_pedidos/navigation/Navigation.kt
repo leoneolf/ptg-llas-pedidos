@@ -73,7 +73,7 @@ fun MasterNavGraph(navController: NavHostController) {
         startDestination = AppGraph.master.MENU
     ) {
         composable(route = AppGraph.master.MENU) {
-            CreateNewItem()
+//            CreateNewItem()
         }
         composable(route = AppGraph.master.ORDER) {
             ViewContent(
