@@ -1,6 +1,7 @@
 package com.ptg.llas_pedidos.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -9,12 +10,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.ptg.llas_pedidos.MainActivity
-import com.ptg.llas_pedidos.data.CreateNewItem
+import com.ptg.llas_pedidos.detail.DetailScreen
+import com.ptg.llas_pedidos.detail.DetailViewModel
 import com.ptg.llas_pedidos.ui.components.AdminSingIn
 import com.ptg.llas_pedidos.ui.components.AuthenticationButton
 import com.ptg.llas_pedidos.ui.components.ClientHomeScreen
-import com.ptg.llas_pedidos.ui.components.SingInButton
 
 /*
 *  Definindo:
@@ -73,7 +73,12 @@ fun MasterNavGraph(navController: NavHostController) {
         startDestination = AppGraph.master.MENU
     ) {
         composable(route = AppGraph.master.MENU) {
-            CreateNewItem()
+            ViewContent(
+                name = "Menu",
+                onClick = {
+                    navController.navigate(AppGraph.masterMenu.ROOT)
+                }
+            )
         }
         composable(route = AppGraph.master.ORDER) {
             ViewContent(
@@ -91,6 +96,7 @@ fun MasterNavGraph(navController: NavHostController) {
                 }
             )
         }
+
 
         masterMenuNavGraph(navController = navController)
         masterOrderNavGraph(navController = navController)
@@ -147,18 +153,21 @@ fun ClientNavGraph(navController: NavHostController) {
     }
 }
 
-fun NavGraphBuilder.masterMenuNavGraph(navController: NavController) {
+fun NavGraphBuilder.masterMenuNavGraph(
+    navController: NavController,
+//    detailViewModel: DetailViewModel
+) {
     navigation(
         route = AppGraph.masterMenu.ROOT,
         startDestination = AppGraph.masterMenu.ITEM
     ) {
         composable(AppGraph.masterMenu.ITEM) {
-            ViewContent(
-                name = "Item",
-                onClick = {
-                    navController.navigate(AppGraph.masterMenu.EDIT)
-                }
-            )
+//            DetailScreen(
+//                detailViewModel = detailViewModel,
+//                noteId = entry.arguments?.getString("id") as String,
+//            ) {
+//                navController.navigateUp()
+//            }
         }
         composable(AppGraph.masterMenu.EDIT) {
             ViewContent(

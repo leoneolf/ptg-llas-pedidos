@@ -69,7 +69,7 @@ fun AdminSingIn(
 
         OutlinedButton(
             onClick = {
-                if (password.equals("masterTeste")) {
+                if (password.equals("123")) {
                     onAdminSingInClick()
                 } else {
                     Toast.makeText(context, "Senha errada! Tente novamente.", Toast.LENGTH_SHORT).show()
