@@ -15,6 +15,7 @@ class DetailViewModel(
     var detailUiState by mutableStateOf(DetailUiState())
         private set
 
+
     private val hasUser: Boolean
         get() = repository.hasUser()
 

@@ -31,6 +31,7 @@ fun DetailScreen(
     detailViewModel: DetailViewModel?,
     noteId: String,
     onNavigate: () -> Unit,
+
 ) {
     val detailUiState = detailViewModel?.detailUiState ?: DetailUiState()
 

@@ -21,6 +21,7 @@ class HomeViewModel(
     private val userId: String
         get() = repository.getUserId()
 
+
     fun loadNotes(){
         if (hasUser){
             if (userId.isNotBlank()){

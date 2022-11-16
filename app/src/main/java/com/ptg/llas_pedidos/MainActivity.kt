@@ -34,6 +34,7 @@ class MainActivity : ComponentActivity() {
             val homeViewModel = viewModel(modelClass = HomeViewModel::class.java)
             val detailViewModel = viewModel(modelClass = DetailViewModel::class.java)
             LlasPedidosTheme {
+
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background) {
@@ -46,6 +47,7 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
 }
 
 //class MainActivity : ComponentActivity() {
