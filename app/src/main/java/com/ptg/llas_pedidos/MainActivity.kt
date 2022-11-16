@@ -39,6 +39,7 @@ class MainActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background) {
                     Navigation(
+
                         loginViewModel = loginViewModel,
                         detailViewModel = detailViewModel,
                         homeViewModel = homeViewModel
