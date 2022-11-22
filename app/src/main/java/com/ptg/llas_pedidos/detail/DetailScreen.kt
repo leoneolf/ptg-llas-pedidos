@@ -1,7 +1,6 @@
 package com.ptg.llas_pedidos.detail
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -23,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ptg.llas_pedidos.Utils
+import com.ptg.llas_pedidos.ui.theme.BgColor
 import com.ptg.llas_pedidos.ui.theme.LlasPedidosTheme
 import kotlinx.coroutines.launch
 
@@ -57,6 +57,7 @@ fun DetailScreen(
 
     Scaffold(
         scaffoldState = scaffoldState,
+        backgroundColor = BgColor,
         floatingActionButton = {
             AnimatedVisibility(visible = isFormsNotBlank) {
                 FloatingActionButton(
@@ -82,7 +83,7 @@ fun DetailScreen(
             if (detailUiState.noteAddedStatus) {
                 scope.launch {
                     scaffoldState.snackbarHostState
-                        .showSnackbar("Added Note Successfully")
+                        .showSnackbar("Nota adicionada com sucesso!")
                     detailViewModel?.resetNoteAddedStatus()
                     onNavigate.invoke()
                 }
@@ -91,7 +92,7 @@ fun DetailScreen(
             if (detailUiState.updateNoteStatus) {
                 scope.launch {
                     scaffoldState.snackbarHostState
-                        .showSnackbar("Note Updated Successfully")
+                        .showSnackbar("Nota atualizada com sucesso!")
                     detailViewModel?.resetNoteAddedStatus()
                     onNavigate.invoke()
                 }
@@ -112,34 +113,31 @@ fun DetailScreen(
 
                 }
             }
+
             OutlinedTextField(
                 value = detailUiState.title,
                 onValueChange = {
                     detailViewModel?.onTitleChange(it)
                 },
-                label = { Text(text = "Title") },
+                label = { Text(text = "Título") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
             )
+
             OutlinedTextField(
                 value = detailUiState.note,
                 onValueChange = { detailViewModel?.onNoteChange(it) },
-                label = { Text(text = "Notes") },
+                label = { Text(text = "Notas") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
                     .padding(8.dp)
             )
-
-
         }
-
-
     }
-
-
 }
+
 
 @Composable
 fun ColorItem(

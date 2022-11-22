@@ -7,7 +7,6 @@ import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.ptg.llas_pedidos.models.Notes
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -24,7 +23,6 @@ class StorageRepository {
     private val notesRef: CollectionReference = Firebase
         .firestore.collection(NOTES_COLLECTION_REF)
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun getUserNotes(
         userId: String,
     ): Flow<Resources<List<Notes>>> = callbackFlow {
@@ -44,8 +42,6 @@ class StorageRepository {
                     trySend(response)
 
                 }
-
-
         } catch (e: Exception) {
             trySend(Resources.Error(e.cause))
             e.printStackTrace()
@@ -54,26 +50,22 @@ class StorageRepository {
         awaitClose {
             snapshotStateListener?.remove()
         }
-
-
     }
 
     fun getNote(
-        noteId:String,
-        onError:(Throwable?) -> Unit,
+        noteId: String,
+        onError: (Throwable?) -> Unit,
         onSuccess: (Notes?) -> Unit
-    ){
+    ) {
         notesRef
             .document(noteId)
             .get()
             .addOnSuccessListener {
                 onSuccess.invoke(it?.toObject(Notes::class.java))
             }
-            .addOnFailureListener {result ->
+            .addOnFailureListener { result ->
                 onError.invoke(result.cause)
             }
-
-
     }
 
     fun addNote(
@@ -83,7 +75,7 @@ class StorageRepository {
         timestamp: Timestamp,
         color: Int = 0,
         onComplete: (Boolean) -> Unit,
-    ){
+    ) {
         val documentId = notesRef.document().id
         val note = Notes(
             userId,
@@ -99,11 +91,9 @@ class StorageRepository {
             .addOnCompleteListener { result ->
                 onComplete.invoke(result.isSuccessful)
             }
-
-
     }
 
-    fun deleteNote(noteId: String,onComplete: (Boolean) -> Unit){
+    fun deleteNote(noteId: String, onComplete: (Boolean) -> Unit) {
         notesRef.document(noteId)
             .delete()
             .addOnCompleteListener {
@@ -113,12 +103,12 @@ class StorageRepository {
 
     fun updateNote(
         title: String,
-        note:String,
+        note: String,
         color: Int,
         noteId: String,
-        onResult:(Boolean) -> Unit
-    ){
-        val updateData = hashMapOf<String,Any>(
+        onResult: (Boolean) -> Unit
+    ) {
+        val updateData = hashMapOf<String, Any>(
             "colorIndex" to color,
             "description" to note,
             "title" to title,
@@ -129,14 +119,9 @@ class StorageRepository {
             .addOnCompleteListener {
                 onResult(it.isSuccessful)
             }
-
-
-
     }
 
     fun signOut() = Firebase.auth.signOut()
-
-
 }
 
 
@@ -147,5 +132,4 @@ sealed class Resources<T>(
     class Loading<T> : Resources<T>()
     class Success<T>(data: T?) : Resources<T>(data = data)
     class Error<T>(throwable: Throwable?) : Resources<T>(throwable = throwable)
-
 }

@@ -78,4 +78,6 @@ dependencies {
     }
     // Coil
     implementation("io.coil-kt:coil-compose:2.2.2")
+    // status bar customization
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.25.1"
 }

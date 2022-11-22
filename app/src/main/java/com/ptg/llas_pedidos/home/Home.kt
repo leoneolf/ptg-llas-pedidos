@@ -1,12 +1,15 @@
 package com.ptg.llas_pedidos.home
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -24,11 +27,12 @@ import com.ptg.llas_pedidos.Utils
 import com.ptg.llas_pedidos.models.Notes
 import com.ptg.llas_pedidos.repository.Resources
 import com.ptg.llas_pedidos.ui.theme.LlasPedidosTheme
+import com.ptg.llas_pedidos.ui.theme.BgColor
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-@OptIn(ExperimentalFoundationApi::class, androidx.compose.animation.ExperimentalAnimationApi::class)
+@OptIn(androidx.compose.animation.ExperimentalAnimationApi::class)
 @Composable
 fun Home(
     homeViewModel: HomeViewModel?,
@@ -54,8 +58,13 @@ fun Home(
 
     Scaffold(
         scaffoldState = scaffoldState,
+        backgroundColor = BgColor,
         floatingActionButton = {
-            FloatingActionButton(onClick = { navToDetailPage.invoke() }) {
+            FloatingActionButton(
+                onClick = {
+                    navToDetailPage.invoke()
+                }
+            ) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = null,
@@ -64,6 +73,7 @@ fun Home(
         },
         topBar = {
             TopAppBar(
+                backgroundColor = Color.Cyan,
                 navigationIcon = {},
                 actions = {
                     IconButton(onClick = {
@@ -77,12 +87,16 @@ fun Home(
                     }
                 },
                 title = {
-                    Text(text = "Home")
+                    Text(text = "Anota aí")
                 }
             )
         }
     ) { padding ->
-        Column(modifier = Modifier.padding(padding)) {
+        Column(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize()
+        ) {
             when (homeUiState.notesList) {
                 is Resources.Loading -> {
                     CircularProgressIndicator(
@@ -91,6 +105,7 @@ fun Home(
                             .wrapContentSize(align = Alignment.Center)
                     )
                 }
+
                 is Resources.Success -> {
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(1),
@@ -108,17 +123,15 @@ fun Home(
                             ) {
                                 onNoteClick.invoke(note.documentId)
                             }
-
                         }
-
-
                     }
+
                     AnimatedVisibility(visible = openDialog) {
                         AlertDialog(
                             onDismissRequest = {
                                 openDialog = false
                             },
-                            title = { Text(text = "Delete Note?") },
+                            title = { Text(text = "Deseja realmente apagar?") },
                             confirmButton = {
                                 Button(
                                     onClick = {
@@ -130,43 +143,42 @@ fun Home(
                                     colors = ButtonDefaults.buttonColors(
                                         backgroundColor = Color.Red
                                     ),
+                                    shape = RoundedCornerShape(75)
                                 ) {
-                                    Text(text = "Delete")
+                                    Text(text = "Apagar")
                                 }
                             },
                             dismissButton = {
-                                Button(onClick = { openDialog = false }) {
-                                    Text(text = "Cancel")
+                                Button(
+                                    onClick = {
+                                        openDialog = false
+                                    },
+                                    shape = RoundedCornerShape(75)
+                                ) {
+                                    Text(text = "Cancelar")
                                 }
                             }
                         )
-
-
                     }
                 }
                 else -> {
                     Text(
                         text = homeUiState
-                            .notesList.throwable?.localizedMessage ?: "Unknown Error",
+                            .notesList.throwable?.localizedMessage ?: "Erro desconhecido",
                         color = Color.Red
                     )
                 }
-
-
             }
-
-
         }
-
     }
+
     LaunchedEffect(key1 = homeViewModel?.hasUser){
         if (homeViewModel?.hasUser == false){
             navToLoginPage.invoke()
         }
     }
-
-
 }
+
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -183,9 +195,13 @@ fun NoteItem(
             )
             .padding(8.dp)
             .fillMaxWidth(),
+        border = BorderStroke(
+            width = 1.dp,
+            color = Color.Black
+        ),
+        elevation = 10.dp,
         backgroundColor = Utils.colors[notes.colorIndex]
     ) {
-
         Column {
             Text(
                 text = notes.title,
@@ -195,7 +211,9 @@ fun NoteItem(
                 overflow = TextOverflow.Clip,
                 modifier = Modifier.padding(4.dp)
             )
-            Spacer(modifier = Modifier.size(4.dp))
+
+            Spacer(modifier = Modifier.height(4.dp))
+
             CompositionLocalProvider(
                 LocalContentAlpha provides ContentAlpha.disabled
             ) {
@@ -206,9 +224,10 @@ fun NoteItem(
                     modifier = Modifier.padding(4.dp),
                     maxLines = 4
                 )
-
             }
-            Spacer(modifier = Modifier.size(4.dp))
+
+            Spacer(modifier = Modifier.height(4.dp))
+
             CompositionLocalProvider(
                 LocalContentAlpha provides ContentAlpha.disabled
             ) {
@@ -221,21 +240,14 @@ fun NoteItem(
                         .align(Alignment.End),
                     maxLines = 4
                 )
-
             }
-
-
         }
-
-
     }
-
-
 }
 
 
 private fun formatDate(timestamp: Timestamp): String {
-    val sdf = SimpleDateFormat("MM-dd-yy hh:mm", Locale.getDefault())
+    val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm", Locale.getDefault())
     return sdf.format(timestamp.toDate())
 }
 

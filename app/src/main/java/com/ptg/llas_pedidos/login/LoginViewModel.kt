@@ -16,7 +16,6 @@ class LoginViewModel(
 ) : ViewModel() {
     val currentUser = repository.currentUser
 
-
     val hasUser: Boolean
         get() = repository.hasUser()
 
@@ -56,14 +55,14 @@ class LoginViewModel(
     fun createUser(context: Context) = viewModelScope.launch {
         try {
             if (!validateSignupForm()) {
-                throw IllegalArgumentException("email and password can not be empty")
+                throw IllegalArgumentException("E-mail e senha precisam ser preenchidos!")
             }
             loginUiState = loginUiState.copy(isLoading = true)
             if (loginUiState.passwordSignUp !=
                 loginUiState.confirmPasswordSignUp
             ) {
                 throw IllegalArgumentException(
-                    "Password do not match"
+                    "As senhas não são iguais."
                 )
             }
             loginUiState = loginUiState.copy(signUpError = null)
@@ -74,14 +73,14 @@ class LoginViewModel(
                 if (isSuccessful) {
                     Toast.makeText(
                         context,
-                        "success Login",
+                        "Logado com sucesso!",
                         Toast.LENGTH_SHORT
                     ).show()
                     loginUiState = loginUiState.copy(isSuccessLogin = true)
                 } else {
                     Toast.makeText(
                         context,
-                        "Failed Login",
+                        "Erro ao logar!",
                         Toast.LENGTH_SHORT
                     ).show()
                     loginUiState = loginUiState.copy(isSuccessLogin = false)
@@ -89,21 +88,18 @@ class LoginViewModel(
 
             }
 
-
         } catch (e: Exception) {
             loginUiState = loginUiState.copy(signUpError = e.localizedMessage)
             e.printStackTrace()
         } finally {
             loginUiState = loginUiState.copy(isLoading = false)
         }
-
-
     }
 
     fun loginUser(context: Context) = viewModelScope.launch {
         try {
             if (!validateLoginForm()) {
-                throw IllegalArgumentException("email and password can not be empty")
+                throw IllegalArgumentException("E-mail e senha precisam ser preenchidos!")
             }
             loginUiState = loginUiState.copy(isLoading = true)
             loginUiState = loginUiState.copy(loginError = null)
@@ -114,21 +110,19 @@ class LoginViewModel(
                 if (isSuccessful) {
                     Toast.makeText(
                         context,
-                        "success Login",
+                        "Logado com sucesso!",
                         Toast.LENGTH_SHORT
                     ).show()
                     loginUiState = loginUiState.copy(isSuccessLogin = true)
                 } else {
                     Toast.makeText(
                         context,
-                        "Failed Login",
+                        "Erro ao logar!",
                         Toast.LENGTH_SHORT
                     ).show()
                     loginUiState = loginUiState.copy(isSuccessLogin = false)
                 }
-
             }
-
 
         } catch (e: Exception) {
             loginUiState = loginUiState.copy(loginError = e.localizedMessage)
@@ -136,11 +130,7 @@ class LoginViewModel(
         } finally {
             loginUiState = loginUiState.copy(isLoading = false)
         }
-
-
     }
-
-
 }
 
 data class LoginUiState(

@@ -48,8 +48,6 @@ fun Navigation(
             homeViewModel
         )
     }
-
-
 }
 
 fun NavGraphBuilder.authGraph(
@@ -61,14 +59,15 @@ fun NavGraphBuilder.authGraph(
         route = NestedRoutes.Login.name
     ) {
         composable(route = LoginRoutes.SignIn.name) {
-            LoginScreen(onNavToHomePage = {
-                navController.navigate(NestedRoutes.Main.name) {
-                    launchSingleTop = true
-                    popUpTo(route = LoginRoutes.SignIn.name) {
-                        inclusive = true
+            LoginScreen(
+                onNavToHomePage = {
+                    navController.navigate(NestedRoutes.Main.name) {
+                        launchSingleTop = true
+                        popUpTo(route = LoginRoutes.SignIn.name) {
+                            inclusive = true
+                        }
                     }
-                }
-            },
+                },
                 loginViewModel = loginViewModel
 
             ) {
@@ -82,40 +81,38 @@ fun NavGraphBuilder.authGraph(
         }
 
         composable(route = LoginRoutes.Signup.name) {
-            SignUpScreen(onNavToHomePage = {
-                navController.navigate(NestedRoutes.Main.name) {
-                    popUpTo(LoginRoutes.Signup.name) {
-                        inclusive = true
+            SignUpScreen(
+                onNavToHomePage = {
+                    navController.navigate(NestedRoutes.Main.name) {
+                        popUpTo(LoginRoutes.Signup.name) {
+                            inclusive = true
+                        }
                     }
-                }
-            },
+                },
                 loginViewModel = loginViewModel
             ) {
                 navController.navigate(LoginRoutes.SignIn.name)
             }
-
         }
-
     }
-
 }
 
 fun NavGraphBuilder.homeGraph(
     navController: NavHostController,
     detailViewModel: DetailViewModel,
     homeViewModel: HomeViewModel
-){
+) {
     navigation(
         startDestination = HomeRoutes.Home.name,
         route = NestedRoutes.Main.name,
-    ){
-        composable(HomeRoutes.Home.name){
+    ) {
+        composable(HomeRoutes.Home.name) {
             Home(
                 homeViewModel = homeViewModel,
                 onNoteClick = { noteId ->
                     navController.navigate(
                         HomeRoutes.Detail.name + "?id=$noteId"
-                    ){
+                    ) {
                         launchSingleTop = true
                     }
                 },
@@ -123,23 +120,22 @@ fun NavGraphBuilder.homeGraph(
                     navController.navigate(HomeRoutes.Detail.name)
                 }
             ) {
-                navController.navigate(NestedRoutes.Login.name){
+                navController.navigate(NestedRoutes.Login.name) {
                     launchSingleTop = true
-                    popUpTo(0){
+                    popUpTo(0) {
                         inclusive = true
                     }
                 }
-
             }
         }
 
         composable(
             route = HomeRoutes.Detail.name + "?id={id}",
-            arguments = listOf(navArgument("id"){
+            arguments = listOf(navArgument("id") {
                 type = NavType.StringType
                 defaultValue = ""
             })
-        ){ entry ->
+        ) { entry ->
 
             DetailScreen(
                 detailViewModel = detailViewModel,
@@ -148,15 +144,6 @@ fun NavGraphBuilder.homeGraph(
                 navController.navigateUp()
 
             }
-
-
         }
-
-
-
     }
-
-
-
-
 }
