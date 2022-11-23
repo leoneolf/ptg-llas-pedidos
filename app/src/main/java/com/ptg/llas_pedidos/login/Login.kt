@@ -392,8 +392,6 @@ fun SignUpScreen(
             }
         }
     }
-
-
 }
 
 @Preview(showSystemUi = true)

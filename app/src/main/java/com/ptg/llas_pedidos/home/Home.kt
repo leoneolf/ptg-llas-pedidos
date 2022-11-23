@@ -18,12 +18,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.google.firebase.Timestamp
 import com.ptg.llas_pedidos.Utils
+import com.ptg.llas_pedidos.login.offset
 import com.ptg.llas_pedidos.models.Notes
 import com.ptg.llas_pedidos.repository.Resources
 import com.ptg.llas_pedidos.ui.theme.LlasPedidosTheme
@@ -63,7 +68,8 @@ fun Home(
             FloatingActionButton(
                 onClick = {
                     navToDetailPage.invoke()
-                }
+                },
+                backgroundColor = Color.Cyan
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
@@ -100,6 +106,7 @@ fun Home(
             when (homeUiState.notesList) {
                 is Resources.Loading -> {
                     CircularProgressIndicator(
+                        color = Color.Cyan,
                         modifier = Modifier
                             .fillMaxSize()
                             .wrapContentSize(align = Alignment.Center)
@@ -131,7 +138,28 @@ fun Home(
                             onDismissRequest = {
                                 openDialog = false
                             },
-                            title = { Text(text = "Deseja realmente apagar?") },
+                            title = {
+                                Text(
+                                    text = "Por favor comfirme!",
+                                    fontFamily = FontFamily.Cursive,
+                                    style = TextStyle(
+                                        fontSize = 20.sp
+                                    ),
+                                    fontWeight = FontWeight.Black,
+                                    color = Color.Black
+                                )
+                            },
+                            text = {
+                                Text(
+                                    text = "Deseja realmente apagar o pedido?",
+                                    fontFamily = FontFamily.Cursive,
+                                    style = TextStyle(
+                                        fontSize = 16.sp
+                                    ),
+                                    fontWeight = FontWeight.Black,
+                                    color = Color.Black
+                                )
+                            },
                             confirmButton = {
                                 Button(
                                     onClick = {
@@ -145,7 +173,15 @@ fun Home(
                                     ),
                                     shape = RoundedCornerShape(75)
                                 ) {
-                                    Text(text = "Apagar")
+                                    Text(
+                                        fontFamily = FontFamily.Cursive,
+                                        text = "Apagar",
+                                        style = TextStyle(
+                                            fontSize = 16.sp,
+                                        ),
+                                        fontWeight = FontWeight.Black,
+                                        color = Color.Black
+                                    )
                                 }
                             },
                             dismissButton = {
@@ -153,11 +189,24 @@ fun Home(
                                     onClick = {
                                         openDialog = false
                                     },
+                                    colors = ButtonDefaults.buttonColors(
+                                        backgroundColor = Color.Cyan,
+                                    ),
                                     shape = RoundedCornerShape(75)
                                 ) {
-                                    Text(text = "Cancelar")
+                                    Text(
+                                        fontFamily = FontFamily.Cursive,
+                                        text = "Cancelar",
+                                        style = TextStyle(
+                                            fontSize = 16.sp,
+                                        ),
+                                        fontWeight = FontWeight.Black,
+                                        color = Color.Black
+                                    )
                                 }
-                            }
+                            },
+                            backgroundColor = BgColor,
+                            contentColor = Color.Black
                         )
                     }
                 }

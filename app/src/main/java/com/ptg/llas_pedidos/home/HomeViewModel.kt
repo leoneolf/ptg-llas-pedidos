@@ -29,7 +29,7 @@ class HomeViewModel(
             }
         }else{
             homeUiState = homeUiState.copy(notesList = Resources.Error(
-                throwable = Throwable(message = "User is not Login")
+                throwable = Throwable(message = "O usuário não está logado")
             ))
         }
     }
@@ -46,15 +46,8 @@ class HomeViewModel(
 
     fun signOut() = repository.signOut()
 
-
-
-
-
-
-
-
-
 }
+
 
 data class HomeUiState(
     val notesList: Resources<List<Notes>> = Resources.Loading(),

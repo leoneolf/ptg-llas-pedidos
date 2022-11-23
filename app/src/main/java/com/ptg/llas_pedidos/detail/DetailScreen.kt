@@ -1,5 +1,6 @@
 package com.ptg.llas_pedidos.detail
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
@@ -26,6 +27,7 @@ import com.ptg.llas_pedidos.ui.theme.BgColor
 import com.ptg.llas_pedidos.ui.theme.LlasPedidosTheme
 import kotlinx.coroutines.launch
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun DetailScreen(
     detailViewModel: DetailViewModel?,
@@ -67,7 +69,8 @@ fun DetailScreen(
                         } else {
                             detailViewModel?.addNote()
                         }
-                    }
+                    },
+                    backgroundColor = Color.Cyan
                 ) {
                     Icon(imageVector = icon, contentDescription = null)
                 }
@@ -83,7 +86,7 @@ fun DetailScreen(
             if (detailUiState.noteAddedStatus) {
                 scope.launch {
                     scaffoldState.snackbarHostState
-                        .showSnackbar("Nota adicionada com sucesso!")
+                        .showSnackbar("Pedido adicionado com sucesso!")
                     detailViewModel?.resetNoteAddedStatus()
                     onNavigate.invoke()
                 }
@@ -92,7 +95,7 @@ fun DetailScreen(
             if (detailUiState.updateNoteStatus) {
                 scope.launch {
                     scaffoldState.snackbarHostState
-                        .showSnackbar("Nota atualizada com sucesso!")
+                        .showSnackbar("Pedido atualizado com sucesso!")
                     detailViewModel?.resetNoteAddedStatus()
                     onNavigate.invoke()
                 }
@@ -115,25 +118,38 @@ fun DetailScreen(
             }
 
             OutlinedTextField(
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.Cyan,
+                    focusedLabelColor = Color.Cyan,
+                    cursorColor = Color.Cyan
+                ),
                 value = detailUiState.title,
                 onValueChange = {
                     detailViewModel?.onTitleChange(it)
                 },
-                label = { Text(text = "Título") },
+                label = { Text(text = "Mesa") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp)
+                    .padding(16.dp)
             )
 
             OutlinedTextField(
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.Cyan,
+                    focusedLabelColor = Color.Cyan,
+                    cursorColor = Color.Cyan
+                ),
                 value = detailUiState.note,
                 onValueChange = { detailViewModel?.onNoteChange(it) },
-                label = { Text(text = "Notas") },
+                label = { Text(text = "Pedido") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
-                    .padding(8.dp)
+                    .padding(16.dp)
             )
+
+            Spacer(modifier = Modifier.height(30.dp))
+
         }
     }
 }
@@ -157,8 +173,6 @@ fun ColorItem(
     ) {
 
     }
-
-
 }
 
 
@@ -170,5 +184,4 @@ fun PrevDetailScreen() {
 
         }
     }
-
 }
